@@ -1,0 +1,18 @@
+{
+  "name": "electron_simil_obsidian",
+  "version": "1.0.0",
+  "description": "white",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron": "^25.9.8"
+  },
+  "author": "Tobias Rimoli",
+  "license": "ISC",
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  }
+}
