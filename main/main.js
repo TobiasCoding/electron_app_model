@@ -13,7 +13,7 @@ function createWindow() {
         }
     });
 
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile(path.join(__dirname, 'index.html'));  // puede que al compilarse esto del __dirname genere conflictos
 }
 
 app.on('ready', createWindow);
@@ -37,3 +37,4 @@ ipcMain.on('navigate', (event, arg, section) => {
         });
     }
 });
+
