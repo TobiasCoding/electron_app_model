@@ -1,7 +1,7 @@
-// // item.js
+// item.js
 
-// // Ejemplo de nombre del item
-// var itemName = "Nombre del Item Dinámico";
+// Ejemplo de nombre del item
+var itemName = "Contenido del Item. Desde item.js";
 
-// // Renderizar el nombre del item en el HTML
-// document.getElementById('item-name').textContent = itemName;
+// Renderizar el nombre del item en el HTML
+document.getElementById('item-content').textContent = itemName;

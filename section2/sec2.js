@@ -49,26 +49,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Cargar contenido de item.html en la nueva item
-        fetch('item.html')
-            .then(response => response.text())
-            .then(data => {
-                newTabContent.innerHTML = data;
+        // fetch('item.html')
+        //     .then(response => response.text())
+        //     .then(data => {
+        //         newTabContent.innerHTML = data;
                 
-                // Cargar el nombre del ítem desde item.js
-                fetch('item.js')
-                    .then(response => response.text())
-                    .then(scriptData => {
-                        // Ejecutar el script para obtener el nombre del ítem
-                        var scriptElement = document.createElement('script');
-                        scriptElement.textContent = scriptData;
-                        newTabContent.appendChild(scriptElement);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching item.js', error);
-                    });
-            })
-            .catch(error => {
-                console.error('Error fetching item.html', error);
-            });
+        //         // Cargar el nombre del ítem desde item.js
+        //         fetch('item.js')
+        //             .then(response => response.text())
+        //             .then(scriptData => {
+        //                 // Ejecutar el script para obtener el nombre del ítem
+        //                 var scriptElement = document.createElement('script');
+        //                 scriptElement.textContent = scriptData;
+        //                 newTabContent.appendChild(scriptElement);
+        //             })
+        //             .catch(error => {
+        //                 console.error('Error fetching item.js', error);
+        //             });
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching item.html', error);
+        //     });
     });
 });
