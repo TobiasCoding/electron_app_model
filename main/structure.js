@@ -67,6 +67,10 @@ function navigateToSection(section) {
             sectionId = 'section1-section';
             route = 'section1/sec1.html';
             break;
+        case 'Subsección 2':
+            sectionId = 'section2-section';
+            route = 'section2/sec2.html';
+            break;
         // Añadir más casos para otras secciones si es necesario
         default:
             console.error('Unknown section:', section);
@@ -75,6 +79,7 @@ function navigateToSection(section) {
 
     ipcRenderer.send('navigate', route); // Ajustar la ruta según sea necesario
 
+    /////////// ESTO CREO QUE QUEDÓ DEPRECATED
     const sectionElement = document.getElementById(sectionId);
     if (sectionElement) {
         sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Desplazarse suavemente al inicio de la sección

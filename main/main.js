@@ -5,8 +5,7 @@ let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 300,
+        fullscreen: true, // Esto activa el modo de pantalla completa
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
