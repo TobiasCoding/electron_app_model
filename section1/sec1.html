@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sección 1</title>
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/nav-bar.css">
 </head>
 <body>
-    <div class="top-bar">
-        <span class="nav-link">Home</span>
-        <span class="nav-link">Sección 1</span>
-        <span class="nav-link">Sección 2</span>
+    <div id="top-bar"></div>
+
+    <div id="section1-section" class="tab-content">
+        <h1>Contenido de Sección 1</h1>
+        <div id="content" class="tab-content" data-section="Sección 1">Esta es la Sección 1.</div>
     </div>
 
-    <h1>Contenido de Sección 1</h1>
-
-    <div id="content" class="tab-content" data-section="Sección 1">Esta es la Sección 1.</div>
+    <script>
+        function varState(){
+            // Obtener el número actual almacenado en localStorage o inicializarlo a 0
+            let number = parseInt(localStorage.getItem("number")) || 0;
+            // Incrementar el número
+            number++;
+            console.log(number);
+            // Guardar el número actualizado en localStorage
+            localStorage.setItem("number", number);
+    
+            // Actualizar el contenido del elemento <h1> con el nuevo número
+            const text = document.getElementById("text");
+            text.textContent = number;
+        }
+    </script>
+    
+    <button onclick="varState()">Agregar Number Masters</button>
+    <h1 id="text"></h1>
+    
 
     <script src="../main/structure.js"></script>
     <script src="sec1_main.js"></script>

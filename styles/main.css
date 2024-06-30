@@ -12,10 +12,6 @@ body {
     border-bottom: 1px solid #181a1f;
 }
 
-.nav-link {
-    margin-right: 20px;
-    cursor: pointer;
-}
 
 .tab-container {
     display: flex;
@@ -47,3 +43,38 @@ body {
     padding: 20px;
     overflow-y: auto;
 }
+
+/* .nav-link {
+    color: white;
+    padding: 10px 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-link:hover {
+    background-color: #575757;
+}
+
+.subsection {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #333;
+    min-width: 150px;
+    z-index: 1;
+}
+
+.subsection .nav-link {
+    display: block;
+    padding: 10px 20px;
+}
+
+.subsection .nav-link:hover {
+    background-color: #575757;
+}
+
+.nav-link:hover .subsection {
+    display: block;
+} */

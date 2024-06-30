@@ -29,7 +29,7 @@ let db = new sqlite3.Database(dbPath, (err) => {
             if (err) {
                 console.error('Error al crear la tabla:', err.message);
             } else {
-                console.log('Tabla "user" asegurada.');
+                console.log('Tabla "user" obtenida.');
             }
         });
     }
@@ -47,16 +47,30 @@ function getUserById(id, callback) {
     });
 }
 
+var user_name;
+
 // Añadir un listener para el botón de nueva pestaña
-document.getElementById('new-tab').addEventListener('click', () => {
-    getUserById(2, (name) => {
-        const tabContent = document.querySelector('.tab-content');
-        const newTab = document.createElement('div');
-        newTab.className = 'tab';
-        newTab.textContent = name ? `Usuario: ${name}` : 'Usuario no encontrado';
-        tabContent.appendChild(newTab);
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('new-tab').addEventListener('click', () => {
+        var user_id = 1;
+
+        getUserById(user_id, (name) => {
+            console.log(name)
+            const tabContent = document.querySelector('.tab-content');
+            const newTab = document.createElement('div');
+            newTab.className = 'tab';
+            newTab.textContent = name ? `Usuario: ${name}` : 'Usuario no encontrado';
+            user_name = name ? `Usuario: ${name}` : 'Usuario no encontrado';
+            
+            const name_h1 = document.getElementById('user-name');
+            name_h1.textContent = user_name;
+
+            tabContent.appendChild(newTab);
+        });
     });
 });
+
+
 
 // Cerrar la base de datos cuando la ventana se cierra
 window.addEventListener('beforeunload', () => {

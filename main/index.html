@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electron App</title>
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/nav-bar.css">
 </head>
 <body>
-    <div class="top-bar">
-        <span class="nav-link">Home</span>
-        <span class="nav-link">Sección 1</span>
-        <span class="nav-link">Sección 2</span>
-    </div>
-    <h1>Home</h1>
-    <div class="tab-container">
-        <div class="tabs">
-            <button id="new-tab">+</button>
-        </div>
-        <div class="tab-content">
-            <!-- Aquí se agregarán las nuevas pestañas -->
+    <div id="top-bar"></div>
+    <h2 id="user-name"></h2>
+    <div id="home-section" class="tab-content">
+        <h1>Home</h1>
+        <div class="tab-container">
+            <div class="tabs">
+                <button id="new-tab">+</button>
+            </div>
+            <div class="tab-content">
+                <!-- Aquí se agregarán las nuevas pestañas -->
+            </div>
         </div>
     </div>
     <script src="structure.js"></script>
-    <script src="renderer.js"></script>
+    <script src="index.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

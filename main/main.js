@@ -6,7 +6,7 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 600,
+        height: 300,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -30,11 +30,13 @@ app.on('activate', () => {
     }
 });
 
-ipcMain.on('navigate', (event, arg, section) => {
+
+ipcMain.on('navigate', (event, arg) => {
     if (mainWindow) {
-        mainWindow.loadFile(arg).then(() => {
-            mainWindow.webContents.send('load-section', section);
+        mainWindow.loadFile(path.join(path.dirname(__dirname), arg)).then(() => {
+            mainWindow.webContents.send('load-section', arg);
+        }).catch((error) => {
+            console.error('Error loading file:', error);
         });
     }
 });
-
