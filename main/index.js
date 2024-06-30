@@ -51,22 +51,22 @@ var user_name;
 
 // Añadir un listener para el botón de nueva pestaña
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('new-tab').addEventListener('click', () => {
-        var user_id = 1;
+    // document.getElementById('new-tab').addEventListener('click', () => {
+    var user_id = 1;
 
-        getUserById(user_id, (name) => {
-            console.log(name)
-            const tabContent = document.querySelector('.tab-content');
-            const newTab = document.createElement('div');
-            newTab.className = 'tab';
-            newTab.textContent = name ? `Usuario: ${name}` : 'Usuario no encontrado';
-            user_name = name ? `Usuario: ${name}` : 'Usuario no encontrado';
-            
-            const name_h1 = document.getElementById('user-name');
-            name_h1.textContent = user_name;
+    getUserById(user_id, (name) => {
+        console.log(name)
+        const tabContent = document.querySelector('.tab-content');
+        const newTab = document.createElement('div');
+        newTab.className = 'tab';
+        newTab.textContent = name ? `Usuario: ${name}` : 'Usuario no encontrado';
+        user_name = name ? `Usuario: ${name}` : 'Usuario no encontrado';
+        
+        const name_h1 = document.getElementById('user-name');
+        name_h1.textContent = user_name;
 
-            tabContent.appendChild(newTab);
-        });
+        tabContent.appendChild(newTab);
+    // });
     });
 });
 
