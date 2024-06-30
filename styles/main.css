@@ -44,6 +44,11 @@ body {
     overflow-y: auto;
 }
 
+iframe {
+    border: none;
+    color: transparent;
+}
+
 /* .nav-link {
     color: white;
     padding: 10px 20px;

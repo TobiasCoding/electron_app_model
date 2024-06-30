@@ -5,15 +5,12 @@ window.addEventListener('message', function(event) {
 
     // Extraer el nombre del item desde el mensaje
     var itemName = event.data;
-    renderizarNombreItem(itemName); // Llamar a la función para renderizar el nombre del item
+    renderizarItem(itemName); // Llamar a la función para renderizar el nombre del item
 });
 
 // Función para renderizar el nombre del item en el HTML
-function renderizarNombreItem(nombreItem) {
+function renderizarItem(nombreItem) {
     document.getElementById('item-name').textContent = nombreItem;
-}
-
-// Función para renderizar el contenido del item en el HTML
-function renderizarContenidoItem(contenido) {
+    var contenido = "Texto de contenido";
     document.getElementById('item-content').textContent = contenido;
 }
