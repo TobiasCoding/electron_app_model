@@ -1,13 +1,15 @@
+// const { ipcRenderer } = require('electron');
+
 document.addEventListener('DOMContentLoaded', function() {
     var tabContainer = document.getElementById('tab-container');
     var tabs = tabContainer.querySelector('.tabs');
     var tabContents = tabContainer.querySelector('.tab-content');
 
     // Función para agregar una nueva pestaña
-    document.getElementById('new-tab').addEventListener('click', function() {
+    document.getElementById('new-tab').addEventListener('click', async function() {
         // Crear botón de la nueva pestaña
         var newTabButton = document.createElement('button');
-        var tabCount = tabs.children.length + 1; // Contador de pestañas
+        var tabCount = tabs.children.length; // Contador de pestañas
         newTabButton.textContent = 'item ' + tabCount;
         newTabButton.setAttribute('data-tab-id', tabCount); // Atributo de datos para identificar la pestaña
         
@@ -56,5 +58,15 @@ document.addEventListener('DOMContentLoaded', function() {
             tabs.removeChild(newTabButton);
             tabContents.removeChild(newTabContent);
         });
+
+        // Realizar la consulta a la base de datos y mostrar el resultado en la nueva pestaña
+        try {
+            const item = await ipcRenderer.invoke('get-item', tabCount);
+            const name = item.name;
+            const lastname = item.lastname;
+            newTabContent.innerHTML = `<p>Nombre: ${name}</p><p>Apellido: ${lastname}</p>`;
+        } catch (error) {
+            newTabContent.innerHTML = `<p>Error al obtener el item: ${error.message}</p>`;
+        }
     });
 });

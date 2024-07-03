@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const path = require("path");
 
+
 let mainWindow;
 
 function createWindow() {
@@ -19,17 +20,19 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, "index.html")); // puede que al compilarse esto del __dirname genere conflictos
 }
 
-app.on("ready", createWindow);
+app.whenReady().then(() => {
+  createWindow();
+
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
-  }
-});
-
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
   }
 });
 
@@ -45,3 +48,5 @@ ipcMain.on("navigate", (event, arg) => {
       });
   }
 });
+
+require('./db_handler.js');

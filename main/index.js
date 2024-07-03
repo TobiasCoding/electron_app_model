@@ -1,3 +1,4 @@
+const { ipcMain } = require('electron');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
@@ -12,58 +13,47 @@ let db = new sqlite3.Database(dbPath, (err) => {
         console.log('Conectado a la base de datos SQLite.');
 
         // Crear la tabla si no existe
-        db.run(`CREATE TABLE IF NOT EXISTS user (
+        db.run(`CREATE TABLE IF NOT EXISTS items (
             id INTEGER PRIMARY KEY,
-            name TEXT NOT NULL
+            name TEXT NOT NULL,
+            lastname TEXT NOT NULL
         )`, (err) => {
             if (err) {
                 console.error('Error al crear la tabla:', err.message);
             } else {
-                console.log('Tabla "user" obtenida.');
+                console.log('Tabla "items" obtenida.');
             }
         });
     }
 });
 
-// Función para obtener el nombre del usuario con id 1
-function getUserById(id, callback) {
-    db.get('SELECT name FROM user WHERE id = ?', [id], (err, row) => {
+// Función para obtener el nombre y apellido del usuario con id 1
+function getItemById(id, callback) {
+    db.get('SELECT name, lastname FROM items WHERE id = ?', [id], (err, row) => {
         if (err) {
             console.error('Error al consultar la base de datos:', err.message);
             callback(null);
         } else {
-            callback(row ? row.name : null);
+            callback(row);
         }
     });
 }
 
-var user_name;
-
-// Añadir un listener para el botón de nueva pestaña
-document.addEventListener('DOMContentLoaded', () => {
-    // document.getElementById('new-tab').addEventListener('click', () => {
-    var user_id = 1;
-
-    getUserById(user_id, (name) => {
-        console.log(name)
-        const tabContent = document.querySelector('.tab-content');
-        const newTab = document.createElement('div');
-        newTab.className = 'tab';
-        newTab.textContent = name ? `Usuario: ${name}` : 'Usuario no encontrado';
-        user_name = name ? `Usuario: ${name}` : 'Usuario no encontrado';
-        
-        const name_h1 = document.getElementById('user-name');
-        name_h1.textContent = user_name;
-
-        tabContent.appendChild(newTab);
-    // });
+// Evento para manejar la consulta desde el renderer
+ipcMain.handle('get-item', async (event, id) => {
+    return new Promise((resolve, reject) => {
+        getItemById(id, (item) => {
+            if (item) {
+                resolve(item);
+            } else {
+                reject(new Error('Item no encontrado'));
+            }
+        });
     });
 });
 
-
-
 // Cerrar la base de datos cuando la ventana se cierra
-window.addEventListener('beforeunload', () => {
+app.on('window-all-closed', () => {
     db.close((err) => {
         if (err) {
             console.error('Error al cerrar la base de datos:', err.message);
@@ -72,4 +62,3 @@ window.addEventListener('beforeunload', () => {
         }
     });
 });
-
