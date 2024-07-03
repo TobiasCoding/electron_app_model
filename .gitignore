@@ -1,3 +1,5 @@
 /node_modules
-notes.txt
+/notas
 .vscode
+/dist
+webpack.config.js

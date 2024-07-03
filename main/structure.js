@@ -24,29 +24,29 @@ document.addEventListener('DOMContentLoaded', function() {
             const section = event.target.textContent.trim();
             try {
                 navigateToSection(section);
-                localStorage.setItem('currentSection', section); // Guardar sección en localStorage
+                sessionStorage.setItem('currentSection', section); // Guardar sección en sessionStorage
     
-                // Guardar todas las variables globales en localStorage
-                saveGlobalVariablesToLocalStorage();
+                // Guardar todas las variables globales en sessionStorage
+                saveGlobalVariablesTosessionStorage();
             } catch (error) {
                 console.error('Error navigating to section:', error);
             }
         });
     });    
 
-    // Función para guardar todas las variables globales en localStorage
-    function saveGlobalVariablesToLocalStorage() {
+    // Función para guardar todas las variables globales en sessionStorage
+    function saveGlobalVariablesTosessionStorage() {
         for (let key in window) {
             if (window.hasOwnProperty(key)){// && !isExcludedVariable(key)) {
-                localStorage.setItem(key, JSON.stringify(window[key]));
+                sessionStorage.setItem(key, JSON.stringify(window[key]));
             }
         }
     }
 
-    // Función para excluir variables que no deben guardarse en localStorage
+    // Función para excluir variables que no deben guardarse en sessionStorage
     function isExcludedVariable(variableName) {
         // Aquí puedes añadir nombres de variables que no deseas guardar
-        return variableName.startsWith('_') || variableName === 'localStorage' || variableName === 'sessionStorage';
+        return variableName.startsWith('_') || variableName === 'sessionStorage' || variableName === 'sessionStorage';
         // Ejemplo: Excluir variables que comienzan con '_' y otros casos específicos
     }
 });
@@ -86,4 +86,44 @@ function navigateToSection(section) {
     } else {
         console.error('Section element not found:', sectionId);
     }
+}
+
+
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+
+// Ruta de la base de datos
+const dbPath = path.join(__dirname, 'database.db');
+
+// Crear o abrir la base de datos
+let db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+        console.error('Error al abrir la base de datos:', err.message);
+    } else {
+        console.log('Conectado a la base de datos SQLite.');
+
+        // Crear la tabla si no existe
+        db.run(`CREATE TABLE IF NOT EXISTS user (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL
+        )`, (err) => {
+            if (err) {
+                console.error('Error al crear la tabla:', err.message);
+            } else {
+                console.log('Tabla "user" obtenida.');
+            }
+        });
+    }
+});
+
+// Función para obtener el nombre del usuario con id 1
+function getUserById(id, callback) {
+    db.get('SELECT lastname FROM items WHERE id = ?', [id], (err, row) => {
+        if (err) {
+            console.error('Error al consultar la base de datos:', err.message);
+            callback(null);
+        } else {
+            callback(row ? row.lastname : null);
+        }
+    });
 }

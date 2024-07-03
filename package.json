@@ -5,14 +5,37 @@
   "main": "main/main.js",
   "scripts": {
     "start": "electron .",
-    "test": "electron . --trace-warnings"
+    "test": "electron . --trace-warnings",
+    "package": "electron-packager . electron_app_model --platform=win32 --arch=x64 --out=dist",
+    "build": "webpack && electron-builder"
+  },
+  "build": {
+    "appId": "com.example.electronapp",
+    "win": {
+      "target": "nsis"
+    },
+    "files": [
+      "dist/**/*"
+    ],
+    "extraResources": [
+      "path/to/extra-resources"
+    ]
   },
   "devDependencies": {
-    "electron": "^25.9.8"
+    "@babel/preset-env": "^7.24.7",
+    "electron": "^25.9.8",
+    "electron-packager": "^17.1.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.2",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.10.0",
+    "webpack-node-externals": "^3.0.0"
   },
   "author": "Tobias Rimoli",
   "license": "ISC",
   "dependencies": {
+    "babel-loader": "^9.1.3",
     "sqlite3": "^5.1.7"
   }
 }

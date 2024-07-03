@@ -17,13 +17,13 @@
 
     <script>
         function varState(){
-            // Obtener el número actual almacenado en localStorage o inicializarlo a 0
-            let number = parseInt(localStorage.getItem("number")) || 0;
+            // Obtener el número actual almacenado en sessionStorage o inicializarlo a 0
+            let number = parseInt(sessionStorage.getItem("number")) || 0;
             // Incrementar el número
             number++;
             console.log(number);
-            // Guardar el número actualizado en localStorage
-            localStorage.setItem("number", number);
+            // Guardar el número actualizado en sessionStorage
+            sessionStorage.setItem("number", number);
     
             // Actualizar el contenido del elemento <h1> con el nuevo número
             const text = document.getElementById("text");
@@ -36,7 +36,7 @@
     
 
     <script src="../main/structure.js"></script>
-    <script src="sec1_main.js"></script>
+    <script src="sec1.js"></script>
 
 </body>
 </html>

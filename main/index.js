@@ -1,13 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////7
-// document.getElementById('new-tab').addEventListener('click', () => {
-//     const tabContent = document.querySelector('.tab-content');
-//     const newTab = document.createElement('div');
-//     newTab.className = 'tab';
-//     newTab.textContent = 'Nueva Pestaña';
-//     tabContent.appendChild(newTab);
-// });
-///////////////////////////////////////////////////////////////////////////////////7
-
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 

@@ -11,6 +11,8 @@ window.addEventListener('message', function(event) {
 // Función para renderizar el nombre del item en el HTML
 function renderizarItem(nombreItem) {
     document.getElementById('item-name').textContent = nombreItem;
+
     var contenido = "Texto de contenido";
+
     document.getElementById('item-content').textContent = contenido;
 }
